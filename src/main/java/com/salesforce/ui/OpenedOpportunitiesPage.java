@@ -20,7 +20,7 @@ public class OpenedOpportunitiesPage {
 
     public OpenedOpportunitiesPage(WebDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(driver, 1);
+        wait = new WebDriverWait(driver, 5);
     }
 
     public void verifyOpportunityOpenedByName(String name) {

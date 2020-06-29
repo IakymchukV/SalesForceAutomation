@@ -44,7 +44,7 @@ public class OpportunitiesTabPage {
 
     public void clickNewOpportunities() {
         LOGGER.info("Click on in 'New' button in Opportunities page");
-        buttonNew.isDisplayed();
+        waitAtMost(8, TimeUnit.SECONDS).pollInterval(2, TimeUnit.SECONDS).until(() -> buttonNew.isDisplayed());
         buttonNew.click();
         await("New Opportunity window is not opened").pollInterval(2, TimeUnit.SECONDS)
                 .atMost(5, TimeUnit.SECONDS).until(() -> opportunityTitle.isDisplayed());
