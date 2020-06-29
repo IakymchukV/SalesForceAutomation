@@ -1,11 +1,10 @@
 package com.salesforce.ui;
 
 import static org.awaitility.Awaitility.await;
-import static org.awaitility.Awaitility.waitAtMost;
 
 import java.util.concurrent.TimeUnit;
 
-import org.openqa.selenium.By;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -13,6 +12,7 @@ import org.openqa.selenium.support.FindBy;
 
 public class HomePage {
 
+    private static Logger LOGGER = Logger.getLogger(HomePage.class);
     private final WebDriver driver;
 
     @FindBy(xpath = "//*[@data-id='Opportunity']")
@@ -31,18 +31,16 @@ public class HomePage {
         this.driver = driver;
     }
 
-    public void openHomePage() {
-        driver.get("https://eu13.lightning.force.com/lightning/page/home");
-    }
-
     public void waitHomePageOpened() {
+        LOGGER.info("Wait for Home page opened");
+        await("Home page is not opened").atMost(20, TimeUnit.SECONDS)
+                .pollInterval(2, TimeUnit.SECONDS).until(() -> !loadingScreen.isDisplayed());
         await("Home page is not opened").atMost(15, TimeUnit.SECONDS)
-                .pollInterval(2,TimeUnit.SECONDS).until(() -> !loadingScreen.isDisplayed());
-        await("Home page is not opened").atMost(15, TimeUnit.SECONDS)
-                .pollInterval(2,TimeUnit.SECONDS).until(() -> homeTab.isDisplayed());
+                .pollInterval(2, TimeUnit.SECONDS).until(() -> homeTab.isDisplayed());
     }
 
     public void navigateToOpportunities() {
+        LOGGER.info("Navigate to Opportunities tab");
         opportunityTab.click();
         opportunityTab.isSelected();
     }

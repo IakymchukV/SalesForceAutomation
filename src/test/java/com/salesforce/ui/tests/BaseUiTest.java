@@ -1,7 +1,6 @@
 package com.salesforce.ui.tests;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
@@ -11,9 +10,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 
 
 public class BaseUiTest {
+    private static final String salesForceUrl = "https://login.salesforce.com/";
     WebDriver driver;
-    private static final String salesForceUrl ="https://login.salesforce.com/";
-
 
     @BeforeClass
     public void setUp() {
@@ -21,11 +19,11 @@ public class BaseUiTest {
         driver.get(salesForceUrl);
     }
 
-    private void initializeBrowser(){
+    private void initializeBrowser() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        WebDriverWait wait = new WebDriverWait(driver,5);
+        WebDriverWait wait = new WebDriverWait(driver, 5);
     }
 
     @AfterClass

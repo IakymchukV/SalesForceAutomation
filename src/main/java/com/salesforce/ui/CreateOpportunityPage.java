@@ -2,46 +2,53 @@ package com.salesforce.ui;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.Assert;
 
 public class CreateOpportunityPage {
 
+    private static Logger LOGGER = Logger.getLogger(CreateOpportunityPage.class);
     private final WebDriver driver;
     @FindBy(xpath = "//span[text()='Opportunity Name']/parent::label/following-sibling::input")
-    WebElement opportunityName;
+    private WebElement opportunityName;
+
     @FindBy(xpath = "//input[@title='Search Accounts']")
-    WebElement accountName;
+    private WebElement accountName;
+
     @FindBy(xpath = "//ul[contains(@class,'lookup__list')]//div[contains(@class,'primaryLabel')]")
-    List<WebElement> listAccountNames;
+    private List<WebElement> listAccountNames;
+
     @FindBy(xpath = "//*[contains(@class,'datePicker-openIcon')]")
-    WebElement closeDate;
+    private WebElement closeDate;
 
     @FindBy(xpath = "//table[@class= 'calGrid']//button")
-    WebElement todayButton;
+    private WebElement todayButton;
 
     @FindBy(xpath = "//span[text()='Stage']/parent::span/following-sibling::div")
-    WebElement stage;
+    private WebElement stage;
     @FindBy(xpath = "//ul[@class='scrollable']/li")
-    List<WebElement> stageTypes;
+    private List<WebElement> stageTypes;
 
     @FindBy(xpath = "//button[@title='Save']")
-    WebElement saveButton;
-    @FindBy(xpath = "//div[@data-key='success']")
-    WebElement successAlert;
+    private WebElement saveButton;
 
-    WebDriverWait wait;
+    @FindBy(xpath = "//div[@data-key='success']")
+    private WebElement successAlert;
+
+    private WebDriverWait wait;
 
     public CreateOpportunityPage(WebDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(driver, 1);
+        wait = new WebDriverWait(driver, 3);
     }
 
     public void filledInAllRequiredField(String name, String nameForAccount, String typeForStage) {
+        LOGGER.info("Fill in all required field to create new Opportunity");
+        wait.until(ExpectedConditions.visibilityOf(opportunityName));
         opportunityName.sendKeys(name);
         filledAccountName(nameForAccount);
         chooseTodayDate();
@@ -51,6 +58,7 @@ public class CreateOpportunityPage {
     }
 
     public void filledAccountName(String account) {
+        LOGGER.info("Fill in account name for opportunity as: " + account);
         accountName.click();
         wait.until(ExpectedConditions.visibilityOfAllElements(listAccountNames));
         listAccountNames.forEach(name -> {
@@ -61,12 +69,14 @@ public class CreateOpportunityPage {
     }
 
     public void chooseTodayDate() {
+        LOGGER.info("Pick Today day for date");
         closeDate.click();
         wait.until(ExpectedConditions.elementToBeClickable(todayButton));
         todayButton.click();
     }
 
     public void chooseStageType(String type) {
+        LOGGER.info("Choose stage type as:" + type);
         stage.click();
         wait.until(ExpectedConditions.visibilityOfAllElements(stageTypes));
         stageTypes.forEach(stageType -> {
