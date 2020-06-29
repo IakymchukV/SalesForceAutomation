@@ -34,7 +34,6 @@ public class CreateOpportunityPage {
     @FindBy(xpath = "//div[@data-key='success']")
     WebElement successAlert;
 
-    String randomName = "AQA_Opportunity" + Math.random();
     WebDriverWait wait;
 
     public CreateOpportunityPage(WebDriver driver) {
@@ -42,13 +41,13 @@ public class CreateOpportunityPage {
         wait = new WebDriverWait(driver, 1);
     }
 
-    public void filledInAllRequiredField(String nameForAccount, String typeForStage) {
-        opportunityName.sendKeys(randomName);
+    public void filledInAllRequiredField(String name, String nameForAccount, String typeForStage) {
+        opportunityName.sendKeys(name);
         filledAccountName(nameForAccount);
         chooseTodayDate();
         chooseStageType(typeForStage);
         saveButton.click();
-        Assert.assertTrue(successAlert.isDisplayed(),"Successful message is not present");
+        wait.until(ExpectedConditions.visibilityOf(successAlert));
     }
 
     public void filledAccountName(String account) {

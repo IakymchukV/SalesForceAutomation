@@ -40,6 +40,7 @@ public class OpportunitiesTabPage {
     public void clickNewOpportunities(){
         buttonNew.isDisplayed();
         buttonNew.click();
-        await("New Opportunity window is not opened").pollInterval(2,TimeUnit.SECONDS).atMost(5, TimeUnit.SECONDS).until(() -> opportunityTitle.isDisplayed());
+        await("New Opportunity window is not opened").pollInterval(2,TimeUnit.SECONDS)
+                .atMost(5, TimeUnit.SECONDS).until(() -> opportunityTitle.isDisplayed());
     }
 }
