@@ -6,16 +6,17 @@ import static org.awaitility.Awaitility.waitAtMost;
 
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
 
 public class OpportunitiesTabPage {
 
-    private static Logger LOGGER = Logger.getLogger(OpenedOpportunitiesPage.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(CreateOpportunityPage.class);
     private WebDriver driver;
 
     @FindBy(xpath = "//*[contains(@data-aura-class,'forceBreadCrumbItem')]")
@@ -36,7 +37,7 @@ public class OpportunitiesTabPage {
 
     public void verifyOpportunitiesTabOpened() {
         LOGGER.info("Verify opportunity tab is opened");
-        waitAtMost(5, TimeUnit.SECONDS).pollInterval(2, TimeUnit.SECONDS).until(() -> opportunityTitle.isDisplayed());
+        waitAtMost(8, TimeUnit.SECONDS).pollInterval(2, TimeUnit.SECONDS).until(() -> opportunityTitle.isDisplayed());
         Assert.assertEquals(opportunityTitle.getText(),
                 "Opportunities", "Opportunities title is not present");
     }
