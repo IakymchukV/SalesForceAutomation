@@ -1,16 +1,17 @@
 package com.salesforce.ui;
 
-import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
 public class OpenedOpportunitiesPage {
 
-    private static Logger LOGGER = Logger.getLogger(OpenedOpportunitiesPage.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(OpenedOpportunitiesPage.class);
     private final WebDriver driver;
     private final WebDriverWait wait;
 
@@ -23,7 +24,7 @@ public class OpenedOpportunitiesPage {
     }
 
     public void verifyOpportunityOpenedByName(String name) {
-        LOGGER.info("Verify opportunity opened by name" + name);
+        LOGGER.info("Verify opportunity opened by name{}", name);
         wait.until(ExpectedConditions.visibilityOf(OpportunityName));
         Assert.assertTrue(OpportunityName.getText().equals(name), "Expected opportunity name is " + name
                 + " but found: " + OpportunityName.getText());

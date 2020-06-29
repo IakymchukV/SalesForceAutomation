@@ -4,15 +4,16 @@ import static org.awaitility.Awaitility.await;
 
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class HomePage {
 
-    private static Logger LOGGER = Logger.getLogger(HomePage.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(HomePage.class);
     private final WebDriver driver;
 
     @FindBy(xpath = "//*[@data-id='Opportunity']")
