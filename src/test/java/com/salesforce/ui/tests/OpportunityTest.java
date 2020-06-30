@@ -25,8 +25,7 @@ public class OpportunityTest extends BaseUiTest {
     private String randomName = "AQA_Opportunity" + Math.random();
 
     @BeforeClass
-    public void setUp() {
-        super.setUp();
+    public void beforeClass() {
         loginPage = PageFactory.initElements(getWebDriver(), LoginPage.class);
         homePage = PageFactory.initElements(getWebDriver(), HomePage.class);
         opportunities = PageFactory.initElements(getWebDriver(), OpportunitiesTabPage.class);
@@ -43,10 +42,5 @@ public class OpportunityTest extends BaseUiTest {
         opportunities.clickNewOpportunities();
         createOpportunity.filledInAllRequiredField(randomName, accountName, stageType);
         openedOpportunitiesPage.verifyOpportunityOpenedByName(randomName);
-    }
-
-    @AfterClass
-    public void afterClass() {
-        super.afterClass();
     }
 }
